@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './newCardForm.css'
+import '../newCardForm.css'
 import { addCard } from '../actions/actions'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -18,7 +18,6 @@ class NewCardForm extends Component {
     else {
       this.setState({back: e.target.value})
     }
-
   }
 
   clickHandler = (e) => {
@@ -32,9 +31,7 @@ class NewCardForm extends Component {
   }
 
   render(){
-    // let styles = {
-    //   backgroundColor: '#DF9B44'
-    // }
+
     return <div >
             <h4>Create a new deck of {this.props.subject} cards:</h4>
             <form>
@@ -50,16 +47,12 @@ class NewCardForm extends Component {
 
               <input type="submit" value="Submit" onClick={this.clickHandler}/>
             </form>
-            {/* <code><pre>{JSON.stringify(this.props.currentDeck, null, 4)}</pre></code> */}
-            <div className="card-deck">{this.props.currentDeck.map((card, idx) => {
-              return <div key={idx} className="card">{card.front}</div>
-            })}</div>
+
           </div>
   }
 }
 
 const mapStateToProps = (state) => {
-//console.log('state', state)
   return {currentDeck: state.currentDeck, subject: state.subject}
 }
 

@@ -1,5 +1,6 @@
 const defaultState = {
   subject: '', currentDeck: [], //array of 'card' objects
+  newData: {front: '', back: ''}
 }
 
 const rootReducer = (state = defaultState, action) => {
@@ -10,6 +11,11 @@ const rootReducer = (state = defaultState, action) => {
       return {...state,
         currentDeck: state.currentDeck.concat(action.payload.card)
       }
+    // case: 'EDIT_CARD':
+    //   return {
+    //     ...state,
+    //     newData: action.payload
+    //   }
     default:
       return state
   }

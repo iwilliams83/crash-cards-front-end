@@ -3,9 +3,15 @@ export const updateSubject = (subject) => {
 }
 
 export const addCard = (card) => {
-  console.log('hitting addCard', card)
   return {
       type: 'ADD_CARD',
       payload: { card }
     }
+}
+
+export const editCard = (card) => {
+  return {
+    type: 'EDIT_CARD',
+    payload: { card }
+  }
 }

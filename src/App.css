@@ -14,12 +14,18 @@
   color: black;
 }
 
+.App-footer{
+  height: 100px;
+  background-color: #34888C;
+}
+
 .App-title {
   font-size: 1.5em;
 }
 
 .App-intro {
   font-size: large;
+  height: 300px;
 }
 
 @keyframes App-logo-spin {
