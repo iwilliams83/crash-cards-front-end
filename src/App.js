@@ -1,21 +1,35 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import NavBar from './components/NavBar'
+import NewSubject from './components/NewSubject'
+import NewCardForm from './components/NewCardForm'
 
-class App extends Component {
+export default class App extends Component {
+
+  state = {
+    createNew: false
+  }
+
+  updateState = (subject) => {
+    if (subject.length >= 1){
+      this.setState({
+        createNew: true
+      })
+    }
+  }
+
   render() {
+    console.log('App props', this.props)
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+          <NavBar />
         </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <div className="App-intro">
+          {this.state.createNew ? <NewCardForm /> : <NewSubject updateState={this.updateState}/>}
+        </div>
       </div>
     );
   }
 }
-
-export default App;

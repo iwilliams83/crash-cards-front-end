@@ -1,0 +1,19 @@
+.card-deck {
+  margin-top: 200px;
+  display: flex;
+  background-color: #34888C;
+  align-items: center;
+  height: 150px;
+}
+
+.card {
+  border: solid 1.5px;
+  border-color: black;
+  color: black;
+  width: 7%;
+  height: 100px;
+  margin: 0 5px;
+  border-radius: 10px;
+  line-height: 100px;
+  background-color: #DF9B44;
+}
