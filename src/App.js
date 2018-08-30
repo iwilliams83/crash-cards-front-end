@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import logo from './logo.svg';
 import './App.css';
 import NavBar from './components/NavBar'
 import NewSubject from './components/NewSubject'
@@ -24,16 +23,20 @@ class App extends Component {
     }
   }
 
-  // editCard = () => {
-  //
-  // }
 
   clickHandler = (e) => {
     this.setState( {
       editNew: true,
       cardIndex: e.target.id
     })
+  }
 
+  changeDisplay = () => {
+    this.setState({
+      ...this.state,
+      createNew: true,
+      editNew: false,
+    })
   }
 
   showComponent = () => {
@@ -45,7 +48,7 @@ class App extends Component {
       </div>
     }
     else if (this.state.createNew && !this.state.editNew){
-        console.log('App state:', this.state)
+      console.log('currentDeck after edit:', this.props.currentDeck)
       return <div>
         <NewCardForm />
         <div className="card-footer">{this.props.currentDeck.map((card, idx) => {
@@ -58,7 +61,7 @@ class App extends Component {
     else if (this.state.createNew && this.state.editNew){
 
       return <div>
-        <EditCard cardIndex={this.state.cardIndex}/>
+        <EditCard cardIndex={this.state.cardIndex} changeDisplay={this.changeDisplay}/>
         <div className="card-footer">{this.props.currentDeck.map((card, idx) => {
           return <div key={idx} className="card" id={idx} onClick={this.clickHandler}>
               {card.front}
@@ -69,7 +72,6 @@ class App extends Component {
   }
 
   render() {
-    console.log('App state', this.state)
     return (
       <div className="App">
         <header className="App-header">
@@ -82,12 +84,9 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return {currentDeck: state.currentDeck}
+  return {
+    currentDeck: state.currentDeck
+  }
 }
 
 export default connect(mapStateToProps)(App)
-
-// <div className="App-intro">
-//  {this.state.createNew ? <NewCardForm /> : <NewSubject updateState={this.updateState}/>}
-//</div>
-//{this.state.createNew ? null : <footer className="App-footer"><ExistingDecks /></footer>} */}

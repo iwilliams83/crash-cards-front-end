@@ -53,7 +53,10 @@ class NewCardForm extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return {currentDeck: state.currentDeck, subject: state.subject}
+  return {
+    currentDeck: state.currentDeck,
+    subject: state.subject
+  }
 }
 
 const mapDispatchToProps = (dispatch) => {
@@ -62,5 +65,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-//export default NewCardForm
 export default connect(mapStateToProps, mapDispatchToProps)(NewCardForm)

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { updateSubject } from '../actions/actions'
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
+//import { bindActionCreators } from 'redux'
 
 class NewSubject extends Component {
 

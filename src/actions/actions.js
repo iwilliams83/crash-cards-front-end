@@ -9,9 +9,9 @@ export const addCard = (card) => {
     }
 }
 
-export const editCard = (card) => {
+export const editCard = (card, id) => {
   return {
     type: 'EDIT_CARD',
-    payload: { card }
+    payload: { card, id }
   }
 }
