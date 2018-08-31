@@ -41,7 +41,6 @@ class App extends Component {
 
   showComponent = () => {
     if (!this.state.createNew){
-
       return <div className="App-intro">
         <NewSubject updateState={this.updateState} />
         <ExistingDecks />

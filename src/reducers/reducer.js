@@ -1,5 +1,6 @@
 const defaultState = {
-  subject: '', currentDeck: []
+  subject: '', currentDeck: [],
+  existingDecks: []
 }
 
 const rootReducer = (state = defaultState, action) => {
@@ -14,18 +15,13 @@ const rootReducer = (state = defaultState, action) => {
       let i = action.payload.id //index of card in currentDeck
       let updatedCard = action.payload.card
       const editState = {...state, currentDeck: state.currentDeck.map((card, idx) => {
-          if(idx === parseInt(i)) {
-            return {...card, ...updatedCard}
-          }
-          return card
+          return (idx === parseInt(i, 10)) ? {...card, ...updatedCard} : card
       })}
       return editState
     case 'DELETE_CARD':
       let j = action.payload //index of card in currentDeck
       const deleteState = {...state, currentDeck: state.currentDeck.filter((card, idx) => {
-        if (idx !== parseInt(j)) {
-          return {card}
-        }
+        return (idx !== parseInt(j, 10)) ? {card} : null
       })}
       return deleteState
     default:

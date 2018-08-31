@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import '../cardTray.css'
 import { editCard, deleteCard } from '../actions/actions'
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
+
 
 class EditCard extends Component {
   state = {
@@ -40,9 +40,9 @@ class EditCard extends Component {
       this.props.editCard(card, this.state.cardIndex)
       this.props.changeDisplay()
     }
-    else {
-      console.log('cardIndex=', this.state.cardIndex)
+    else if (e.target.value === 'Delete') {
       this.props.deleteCard(this.state.cardIndex)
+      this.props.changeDisplay()
     }
 
   }
@@ -50,7 +50,7 @@ class EditCard extends Component {
   render(){
 
     return <div >
-            <h4>Edit Card:</h4>
+            <h4>Edit or Delete Card:</h4>
             <form>
               <label>
                 Card Front:

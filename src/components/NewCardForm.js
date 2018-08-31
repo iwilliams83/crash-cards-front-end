@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import '../cardTray.css'
 import { addCard } from '../actions/actions'
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
+
 
 class NewCardForm extends Component {
 
