@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import '../newCardForm.css'
-import { editCard } from '../actions/actions'
+import '../cardTray.css'
+import { editCard, deleteCard } from '../actions/actions'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
@@ -32,12 +32,19 @@ class EditCard extends Component {
 
   clickHandler = (e) => {
     e.preventDefault()
-    const card = {
-      front: this.state.front,
-      back: this.state.back
+    if (e.target.value === 'Submit'){
+      const card = {
+        front: this.state.front,
+        back: this.state.back
+      }
+      this.props.editCard(card, this.state.cardIndex)
+      this.props.changeDisplay()
     }
-    this.props.editCard(card, this.state.cardIndex)
-    this.props.changeDisplay()
+    else {
+      console.log('cardIndex=', this.state.cardIndex)
+      this.props.deleteCard(this.state.cardIndex)
+    }
+
   }
 
   render(){
@@ -58,6 +65,7 @@ class EditCard extends Component {
               </label>
 
               <input type="submit" value="Submit" onClick={this.clickHandler}/>
+              <input type="submit" value="Delete" onClick={this.clickHandler}/>
             </form>
 
           </div>
@@ -72,7 +80,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    editCard: (card, id) => dispatch(editCard(card, id))
+    editCard: (card, id) => dispatch(editCard(card, id)),
+    deleteCard: (id) => dispatch(deleteCard(id))
   }
 }
 

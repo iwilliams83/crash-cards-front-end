@@ -1,0 +1,24 @@
+import React, {Component} from 'react'
+import '../cardTray.css'
+import { connect } from 'react-redux'
+
+class CurrentDeck extends Component {
+
+  render(){
+    return <div >
+            <div className="card-footer" >{this.props.currentDeck.map((card, idx) => {
+              return <div key={idx} className="card" id={idx} onClick={(e) => this.props.setEditState(e)}>
+                {card.front}
+            </div>
+          })}</div>
+        </div>
+  }
+}
+
+const mapStateToProps = (state) => {
+  return {
+    currentDeck: state.currentDeck
+  }
+}
+
+export default connect(mapStateToProps)(CurrentDeck)

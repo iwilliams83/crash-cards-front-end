@@ -6,6 +6,7 @@ import NewSubject from './components/NewSubject'
 import NewCardForm from './components/NewCardForm'
 import ExistingDecks from './components/ExistingDecks'
 import EditCard from './components/EditCard'
+import CurrentDeck from './components/CurrentDeck'
 
 class App extends Component {
 
@@ -23,8 +24,7 @@ class App extends Component {
     }
   }
 
-
-  clickHandler = (e) => {
+  setEditState = (e) => {
     this.setState( {
       editNew: true,
       cardIndex: e.target.id
@@ -42,31 +42,22 @@ class App extends Component {
   showComponent = () => {
     if (!this.state.createNew){
 
-      return <div>
-        <div className="App-intro"><NewSubject updateState={this.updateState} /></div>
-        <div className="App-footer"><ExistingDecks /></div>
+      return <div className="App-intro">
+        <NewSubject updateState={this.updateState} />
+        <ExistingDecks />
       </div>
     }
     else if (this.state.createNew && !this.state.editNew){
-      console.log('currentDeck after edit:', this.props.currentDeck)
-      return <div>
+      return <div className="App-intro">
         <NewCardForm />
-        <div className="card-footer">{this.props.currentDeck.map((card, idx) => {
-          return <div key={idx} className="card" id={idx} onClick={this.clickHandler}>
-              {card.front}
-            </div>
-        })}</div>
+        <CurrentDeck setEditState={this.setEditState}/>
       </div>
     }
     else if (this.state.createNew && this.state.editNew){
 
       return <div>
         <EditCard cardIndex={this.state.cardIndex} changeDisplay={this.changeDisplay}/>
-        <div className="card-footer">{this.props.currentDeck.map((card, idx) => {
-          return <div key={idx} className="card" id={idx} onClick={this.clickHandler}>
-              {card.front}
-            </div>
-        })}</div>
+        <CurrentDeck setEditState={this.setEditState}/>
       </div>
     }
   }

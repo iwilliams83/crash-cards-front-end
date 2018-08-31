@@ -11,16 +11,23 @@ const rootReducer = (state = defaultState, action) => {
         currentDeck: state.currentDeck.concat(action.payload.card)
       }
     case 'EDIT_CARD':
-      let index = action.payload.id
+      let i = action.payload.id //index of card in currentDeck
       let updatedCard = action.payload.card
-
-      const newState = {...state, currentDeck: state.currentDeck.map((card, idx) => {
-          if(idx == index) {
+      const editState = {...state, currentDeck: state.currentDeck.map((card, idx) => {
+          if(idx === parseInt(i)) {
             return {...card, ...updatedCard}
           }
           return card
       })}
-      return newState
+      return editState
+    case 'DELETE_CARD':
+      let j = action.payload //index of card in currentDeck
+      const deleteState = {...state, currentDeck: state.currentDeck.filter((card, idx) => {
+        if (idx !== parseInt(j)) {
+          return {card}
+        }
+      })}
+      return deleteState
     default:
       return state
   }
