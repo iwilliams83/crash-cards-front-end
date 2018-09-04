@@ -21,5 +21,17 @@
 }
 
 .display-card{
+  display: flex;
+  flex-direction: column;
   height: 200px;
+  align-items: center;
+}
+
+.card-dimensions{
+  height: 75%;
+  width: 12%;
+  border: solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }

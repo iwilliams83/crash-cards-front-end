@@ -8,9 +8,6 @@ class ExistingDecks extends Component {
   componentDidMount() {
     let id = this.props.userId
     this.props.fetchDecks(id)
-    // fetch(`http://localhost:3000/api/v1/users/${id}`)
-    //   .then(res => res.json())
-    //     .then(res => this.props.storeCurrentDecks(res))
   }
 
   clickHandler = (e) => {
@@ -20,16 +17,14 @@ class ExistingDecks extends Component {
 
   render(){
     const { existingDecks } = this.props
-    console.log('existingDecks:', existingDecks)
-    // console.log('this.props.existingDecks[0].subject', this.props.existingDecks[0].subject)
+
     return <div className="card-footer">
       {existingDecks.length > 0 && existingDecks.map((card, idx) => {
         return <div key={idx} className="card" id={idx}
           onClick={this.clickHandler}>
           {card.subject}
           </div>
-        })
-      }
+        })}
     </div>
   }
 }

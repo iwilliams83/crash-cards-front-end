@@ -77,7 +77,9 @@ class App extends Component {
               <header className="App-header">
                 <NavBar />
               </header>
-              <button onClick={this.renderHome}>Home</button>
+              <button onClick={this.renderHome} className="home-button">
+                Home
+              </button>
               {this.showComponent()}
             </div>);
   }
