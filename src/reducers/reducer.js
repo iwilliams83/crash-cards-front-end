@@ -1,5 +1,5 @@
 const defaultState = {
-  subject: '', currentDeck: [],
+  subject: '', currentDeck: [], displayId: null,
   existingDecks: [], userId: 1
 }
 
@@ -32,6 +32,10 @@ const rootReducer = (state = defaultState, action) => {
     case 'NEW_DECK':
       let newDeck = action.payload
       return {...state, existingDecks: state.existingDecks.concat(newDeck)}
+    case 'SET_DISPLAY_ID':
+      return {...state, displayId: action.payload}
+    case 'RESET_DISPLAY_ID':
+      return {...state, displayId: null}
     default:
       return state
   }

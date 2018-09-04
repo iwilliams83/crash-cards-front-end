@@ -7,6 +7,8 @@ import NewCardForm from './components/NewCardForm'
 import ExistingDecks from './components/ExistingDecks'
 import EditCard from './components/EditCard'
 import CurrentDeck from './components/CurrentDeck'
+import DisplayCards from './components/DisplayCards'
+import {resetDisplayId} from './actions/actions'
 
 class App extends Component {
 
@@ -40,13 +42,17 @@ class App extends Component {
   }
 
   renderHome = () => {
+    this.props.resetDisplayId()
     this.setState({
         createNew: false
       })
   }
 
   showComponent = () => {
-    if (!this.state.createNew){
+    if (this.props.displayId){
+      return <div><DisplayCards /></div>
+    }
+    else if (!this.state.createNew){
       return <div className="App-intro">
         <NewSubject updateState={this.updateState} />
         <ExistingDecks />
@@ -80,8 +86,14 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    displayId: state.displayId,
     currentDeck: state.currentDeck
   }
 }
+const mapDispatchToProps = (dispatch) => {
+  return {
+    resetDisplayId: () => dispatch(resetDisplayId())
+  }
+}
 
-export default connect(mapStateToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(App)

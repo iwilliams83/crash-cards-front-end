@@ -37,6 +37,20 @@ export const newDeck = (userId, subject, cards) => {
   }
 }
 
+export const setDisplayId = (deckId) => {
+  return {
+    type: 'SET_DISPLAY_ID',
+    payload: deckId
+  }
+}
+export const resetDisplayId = () => {
+  return {
+    type: 'RESET_DISPLAY_ID'
+  }
+}
+
+
+
 export function fetchDecks(id){
   return function(dispatch) {
     return fetch(`http://localhost:3000/api/v1/users/${id}`)

@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import '../cardTray.css'
 import { connect } from 'react-redux'
-import { storeCurrentDecks, fetchDecks } from '../actions/actions'
+import { storeCurrentDecks, fetchDecks, setDisplayId } from '../actions/actions'
 
 class ExistingDecks extends Component {
 
@@ -13,13 +13,19 @@ class ExistingDecks extends Component {
     //     .then(res => this.props.storeCurrentDecks(res))
   }
 
+  clickHandler = (e) => {
+    let deckId = e.target.id
+    this.props.setDisplayId(deckId)
+  }
+
   render(){
     const { existingDecks } = this.props
     console.log('existingDecks:', existingDecks)
     // console.log('this.props.existingDecks[0].subject', this.props.existingDecks[0].subject)
     return <div className="card-footer">
       {existingDecks.length > 0 && existingDecks.map((card, idx) => {
-        return <div key={idx} className="card" id={idx}>
+        return <div key={idx} className="card" id={idx}
+          onClick={this.clickHandler}>
           {card.subject}
           </div>
         })
@@ -38,7 +44,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     storeCurrentDecks: (deckObjects) => dispatch(storeCurrentDecks(deckObjects)),
-    fetchDecks: (id) => dispatch(fetchDecks(id))
+    fetchDecks: (id) => dispatch(fetchDecks(id)),
+    setDisplayId: (id) => dispatch(setDisplayId(id))
   }
 }
 
