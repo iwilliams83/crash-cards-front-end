@@ -22,16 +22,32 @@
 
 .display-card{
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   height: 200px;
-  align-items: center;
+  align-items: flex-end;
+  justify-content: space-around;
+  margin-right: 10em;
+  margin-left: 10em;
 }
 
 .card-dimensions{
-  height: 75%;
-  width: 12%;
+  height: 90%;
+  width: 15%;
   border: solid black;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-evenly;
+}
+
+.checkmark{
+  height: 80px;
+  box-shadow: 4px 8px 10px 0px rgba(0, 0, 0, 0.47);
+  border-radius: 5px;
+}
+
+.checkmark img {
+    height: 80px;
+    border: solid 3px #49319b;
+    background-color: #6544d8;
+    border-radius: 5px;
 }

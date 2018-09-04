@@ -26,7 +26,6 @@ class DisplayCards extends Component{
 
   displayNext = () => {
     let result = this.generatorIterator.next();
-    console.log('result:', result);
     this.setState({
       cardFront: result.value.front,
       cardBack: result.value.back
@@ -63,14 +62,23 @@ class DisplayCards extends Component{
 
   render(){
     return <div className="display-card">
+      <div className="checkmark">
+        <img src="https://bit.ly/2LWzlA7" alt="Turquoise tick check mark Transparent PNG"/>
+      </div>
       <div className="card-dimensions">
         <div>{this.state.showAnswer ? this.state.cardBack : this.state.cardFront}</div>
       </div>
+      <div>
         {this.changeButton()}
-      <button onClick={this.handleClick}>Next Card</button>
+        <br />
+        <br />
+        <button onClick={this.handleClick}>Next Card</button>
+      </div>
     </div>
   }
 }
+
+
 
 const mapStateToProps = (state) => {
   return {
