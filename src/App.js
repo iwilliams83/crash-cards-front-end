@@ -39,6 +39,12 @@ class App extends Component {
     })
   }
 
+  renderHome = () => {
+    this.setState({
+        createNew: false
+      })
+  }
+
   showComponent = () => {
     if (!this.state.createNew){
       return <div className="App-intro">
@@ -48,7 +54,7 @@ class App extends Component {
     }
     else if (this.state.createNew && !this.state.editNew){
       return <div className="App-intro">
-        <NewCardForm />
+        <NewCardForm renderHome={this.renderHome}/>
         <CurrentDeck setEditState={this.setEditState}/>
       </div>
     }
@@ -62,14 +68,13 @@ class App extends Component {
   }
 
   render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <NavBar />
-        </header>
-        {this.showComponent()}
-      </div>
-    );
+    return (<div className="App">
+              <header className="App-header">
+                <NavBar />
+              </header>
+              <button onClick={this.renderHome}>Home</button>
+              {this.showComponent()}
+            </div>);
   }
 }
 

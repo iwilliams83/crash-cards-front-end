@@ -1,6 +1,6 @@
 const defaultState = {
   subject: '', currentDeck: [],
-  existingDecks: []
+  existingDecks: [], userId: 1
 }
 
 const rootReducer = (state = defaultState, action) => {
@@ -24,6 +24,14 @@ const rootReducer = (state = defaultState, action) => {
         return (idx !== parseInt(j, 10)) ? {card} : null
       })}
       return deleteState
+    case 'STORE_DECKS':
+      let userDecks = action.payload.data.map((data) => data.attributes)
+
+      return {...state, existingDecks: userDecks}
+      // return {...state, existingDecks: state.existingDecks.concat(userDecks)}
+    case 'NEW_DECK':
+      let newDeck = action.payload
+      return {...state, existingDecks: state.existingDecks.concat(newDeck)}
     default:
       return state
   }

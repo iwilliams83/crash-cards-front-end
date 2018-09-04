@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import '../cardTray.css'
-import { addCard } from '../actions/actions'
+import { addCard, saveDeck } from '../actions/actions'
 import { connect } from 'react-redux'
 
 
@@ -20,7 +20,7 @@ class NewCardForm extends Component {
     }
   }
 
-  clickHandler = (e) => {
+  createCard = (e) => {
     e.preventDefault()
     const card = this.state;
     this.setState({
@@ -30,10 +30,19 @@ class NewCardForm extends Component {
     this.props.addCard(card);
   }
 
-  render(){
+  createDeck = (e) => {
+    e.preventDefault()
+   let subject = this.props.subject
+   let cards = this.props.currentDeck
+   let userId = this.props.userId
 
+   this.props.saveDeck(userId, subject, cards)
+   this.props.renderHome()
+  }
+
+  render(){
     return <div >
-            <h4>Create a new deck of {this.props.subject} cards:</h4>
+            <h4>Create a new card for your {this.props.subject} deck:</h4>
             <form>
               <label>
                 Card Front:
@@ -45,7 +54,9 @@ class NewCardForm extends Component {
                 <input type="text" name="back" onChange={this.handleChange} value={this.state.back}/>
               </label>
 
-              <input type="submit" value="Submit" onClick={this.clickHandler}/>
+              <input type="submit" value="Add Card" onClick={this.createCard}/>
+              <br />
+              <input type="submit" value="Save Deck" onClick={this.createDeck}/>
             </form>
 
           </div>
@@ -54,6 +65,7 @@ class NewCardForm extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    userId: state.userId,
     currentDeck: state.currentDeck,
     subject: state.subject
   }
@@ -61,7 +73,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addCard: (card) => dispatch(addCard(card))
+    addCard: (card) => dispatch(addCard(card)),
+    saveDeck: (userId, subject, cards) => dispatch(saveDeck(userId, subject, cards))
   }
 }
 
