@@ -65,7 +65,6 @@ class App extends Component {
       </div>
     }
     else if (this.state.createNew && this.state.editNew){
-
       return <div>
         <EditCard cardIndex={this.state.cardIndex} changeDisplay={this.changeDisplay}/>
         <CurrentDeck setEditState={this.setEditState}/>

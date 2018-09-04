@@ -5,17 +5,48 @@ import { connect } from 'react-redux'
 
 class DisplayCards extends Component{
 
+  state = {
+    cardFront: ''
+  }
+
+  generatorIterator = this.getNextCard();
+
+  componentDidMount(){
+    this.displayNext()
+  }
+
+  *getNextCard(){
+    const cards = this.props.cardsToDisplay
+    for (const card of cards) {
+        yield card.front;
+    }
+  }
+
+  displayNext = () => {
+    let result = this.generatorIterator.next();
+    console.log('result:', result);
+    this.setState({
+      cardFront: result.value
+    })
+  }
+
+  handleClick = () => {
+    this.displayNext()
+  }
+
   render(){
-    console.log('in DisplayCards, existingDecks', this.props.existingDecks)
-    console.log('in DisplayCards, displayId', this.props.displayId)
-    return <div>I'm a DisplayCards component yo!</div>
+    return <div>
+      <div className="display-card">{this.state.cardFront}</div>
+      <button onClick={this.handleClick}>Next Card</button>
+    </div>
   }
 }
 
 const mapStateToProps = (state) => {
   return {
     displayId: state.displayId,
-    existingDecks: state.existingDecks
+    existingDecks: state.existingDecks,
+    cardsToDisplay: state.existingDecks[state.displayId]['cards']
   }
 }
 
