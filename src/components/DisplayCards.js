@@ -9,7 +9,9 @@ class DisplayCards extends Component{
   state = {
     cardFront: '',
     cardBack: '',
-    showAnswer: false
+    showAnswer: false,
+    done: false,
+    score: 0
   }
 
   generatorIterator = this.getNextCard();
@@ -20,18 +22,25 @@ class DisplayCards extends Component{
 
   *getNextCard(){
     const cards = this.props.cardsToDisplay
-    for (const card of cards) {
-        yield card
+    for (const index in cards) {
+        yield {card: cards[index], index: index}
     }
   }
 
   displayNext = () => {
     let result = this.generatorIterator.next();
-    if (!result.done){
+    let id = parseInt(result.value.index)
+    let arrLength = this.props.cardsToDisplay.length - 1
+    if (!result.done && id <= arrLength){
       this.setState({
-        cardFront: result.value.front,
-        cardBack: result.value.back
+        cardFront: result.value.card.front,
+        cardBack: result.value.card.back
       })
+      if (id === arrLength) {
+        this.setState({
+          done: true
+        })
+      }
     }
   }
 
@@ -54,7 +63,7 @@ class DisplayCards extends Component{
     }
   }
 
-  changeButton = () => {
+  toggleCard = () => {
     if (this.state.showAnswer){
       return <button onClick={this.handleClick}>See Front</button>
     }
@@ -63,19 +72,34 @@ class DisplayCards extends Component{
     }
   }
 
+  toggleNext = () => {
+    if (this.state.done){
+      return <button onClick={this.handleClick}>My Score</button>
+    }
+    else {
+      return <button onClick={this.handleClick}>Next Card</button>
+    }
+  }
+
+  updateScore = () => {
+    this.setState(prevState => {
+      return {score: prevState.score + 1}
+    })
+  }
+
   render(){
     return <div className="display-card">
-      <div className="checkmark">
+      <div className="checkmark" onClick={this.updateScore}>
         <img src={checkmark} alt="check mark"/>
       </div>
       <div className="card-dimensions">
         <div>{this.state.showAnswer ? this.state.cardBack : this.state.cardFront}</div>
       </div>
       <div>
-        {this.changeButton()}
+        {this.toggleCard()}
         <br />
         <br />
-        <button onClick={this.handleClick}>Next Card</button>
+          {this.toggleNext()}
       </div>
     </div>
   }
