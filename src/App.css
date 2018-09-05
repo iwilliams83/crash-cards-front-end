@@ -3,7 +3,10 @@
 }
 
 .App-logo {
+  display: flex;
   margin-top: -72px;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .App-header {
@@ -28,8 +31,22 @@
   /* height: 300px; */
 }
 
-.home-button{
-  background-color: magenta;
+.buttons{
+  background-color: #6b58d3;
+  height: 30px;
+  width: 50px;
+  color: white;
+  border: solid #8d7af5;
+  border-radius: 5px;
+}
+
+.display-buttons{
+  background-color: #6b58d3;
+  height: 40px;
+  width: 60px;
+  color: white;
+  border: solid #8d7af5;
+  border-radius: 5px;
 }
 
 @keyframes App-logo-spin {

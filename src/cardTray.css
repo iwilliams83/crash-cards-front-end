@@ -7,8 +7,6 @@
 }
 
 .card {
-  /* border: solid 1.5px; */
-  /* border-color: black; */
   color: white;
   width: 7%;
   height: 100px;
@@ -33,10 +31,13 @@
 .card-dimensions{
   height: 90%;
   width: 15%;
-  border: solid black;
+  border: solid 2px #8d7af5;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  background-color: #6544d8;
+  color: white;
 }
 
 .checkmark{
@@ -46,8 +47,8 @@
 }
 
 .checkmark img {
-    height: 75px;
-    border: solid 3px #49319b;
-    background-color: #6544d8;
-    border-radius: 5px;
+  height: 75px;
+  border: solid 3px #8d7af5;
+  background-color: #6544d8;
+  border-radius: 5px;
 }

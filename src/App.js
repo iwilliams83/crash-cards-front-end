@@ -51,7 +51,7 @@ class App extends Component {
 
 
   showHome = (props) => {
-    return <div className="App-intro">
+    return <div >
       <NewSubject updateState={this.updateState} />
       <ExistingDecks {...props}/>
     </div>
@@ -78,23 +78,17 @@ class App extends Component {
 
 
   render() {
-
     return (<div className="App">
-              <header className="App-header">
+              <div className="App-header">
                 <NavBar />
-              </header>
-              <Link to="/">
-                <button className="home-button">
-                  Home
-                </button>
-              </Link>
+              </div>
               {/* {this.showComponent()} */}
               <Switch>
                 <Route exact path="/" render={this.showHome}/>
                 <Route path="/new" render={this.newSubject}/>
                 <Route path="/display" render={this.displayCards}/>
                 <Route path="/edit-new" render={this.editNewCard}/>
-                
+
               </Switch>
             </div>);
   }

@@ -15,7 +15,7 @@ class NewSubject extends Component {
   }
 
   render(){
-    return <div>
+    return <div className="App-intro">
       <h3>Create a new deck, or view an existing deck!</h3>
       <p>To create a new deck, type in a subject and click submit.</p>
       <form>

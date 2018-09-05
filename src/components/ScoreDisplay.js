@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 
 export default class ScoreDisplay extends Component {
   render(){
-    return <div>Your score is {this.props.score}</div>
+    let total = this.props.length
+    return <div>Your score is {this.props.score} / {total}!</div>
   }
 }

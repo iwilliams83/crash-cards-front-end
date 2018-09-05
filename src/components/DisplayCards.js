@@ -72,19 +72,19 @@ class DisplayCards extends Component{
 
   toggleCard = () => {
     if (this.state.showAnswer){
-      return <button onClick={this.handleClick}>See Front</button>
+      return <button className="display-buttons" onClick={this.handleClick}>See Front</button>
     }
     else {
-      return <button onClick={this.handleClick}>See Back</button>
+      return <button className="display-buttons" onClick={this.handleClick}>See Back</button>
     }
   }
 
   toggleNext = () => {
     if (this.state.done){
-      return <button onClick={this.handleClick}>My Score</button>
+      return <button className="display-buttons" onClick={this.handleClick}>My Score</button>
     }
     else {
-      return <button onClick={this.handleClick}>Next Card</button>
+      return <button className="display-buttons" onClick={this.handleClick}>Next Card</button>
     }
   }
 
@@ -96,18 +96,21 @@ class DisplayCards extends Component{
 
   showScore = () => {
     if (this.state.displayScore){
-      return <ScoreDisplay score={this.state.score} />
+      let arrLength = this.props.cardsToDisplay.length
+      return <div><ScoreDisplay score={this.state.score} length={arrLength}/></div>
     }
     else {
-      return <img src={checkmark} alt="check mark"/>
+      return <div className="checkmark" onClick={this.updateScore}>
+              <img src={checkmark} alt="check mark"/>
+            </div>
     }
   }
 
   render(){
     return <div className="display-card">
-      <div className="checkmark" onClick={this.updateScore}>
+
         {this.showScore()}
-      </div>
+
       <div className="card-dimensions">
         <div>{this.state.showAnswer ? this.state.cardBack : this.state.cardFront}</div>
       </div>
