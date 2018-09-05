@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import '../cardTray.css'
 import { connect } from 'react-redux'
+import checkmark from '../images/check-mark.png'
 //import {  } from '../actions/actions'
 
 class DisplayCards extends Component{
@@ -26,10 +27,12 @@ class DisplayCards extends Component{
 
   displayNext = () => {
     let result = this.generatorIterator.next();
-    this.setState({
-      cardFront: result.value.front,
-      cardBack: result.value.back
-    })
+    if (!result.done){
+      this.setState({
+        cardFront: result.value.front,
+        cardBack: result.value.back
+      })
+    }
   }
 
   handleClick = (e) => {
@@ -63,7 +66,7 @@ class DisplayCards extends Component{
   render(){
     return <div className="display-card">
       <div className="checkmark">
-        <img src="https://bit.ly/2LWzlA7" alt="Turquoise tick check mark Transparent PNG"/>
+        <img src={checkmark} alt="check mark"/>
       </div>
       <div className="card-dimensions">
         <div>{this.state.showAnswer ? this.state.cardBack : this.state.cardFront}</div>
@@ -77,7 +80,6 @@ class DisplayCards extends Component{
     </div>
   }
 }
-
 
 
 const mapStateToProps = (state) => {

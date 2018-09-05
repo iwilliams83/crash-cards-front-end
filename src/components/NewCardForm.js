@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import '../cardTray.css'
 import { addCard, saveDeck } from '../actions/actions'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 
 class NewCardForm extends Component {
@@ -37,10 +38,11 @@ class NewCardForm extends Component {
    let userId = this.props.userId
 
    this.props.saveDeck(userId, subject, cards)
-   this.props.renderHome()
+   this.props.history.push('/')
   }
 
   render(){
+    //console.log('do i have a history? lets find out', this.props)
     return <div >
             <h4>Create a new card for your {this.props.subject} deck:</h4>
             <form>

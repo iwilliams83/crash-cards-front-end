@@ -8,7 +8,10 @@ import ExistingDecks from './components/ExistingDecks'
 import EditCard from './components/EditCard'
 import CurrentDeck from './components/CurrentDeck'
 import DisplayCards from './components/DisplayCards'
-import {resetDisplayId} from './actions/actions'
+import {resetDisplayId, fetchDecks} from './actions/actions'
+import { withRouter } from 'react-router'
+import { Route, Switch, Link } from 'react-router-dom'
+
 
 class App extends Component {
 
@@ -16,6 +19,11 @@ class App extends Component {
     createNew: false,
     editNew: false,
     cardIndex: null
+  }
+
+  componentDidMount() {
+    let id = this.props.userId
+    this.props.fetchDecks(id)
   }
 
   updateState = (subject) => {
@@ -41,60 +49,69 @@ class App extends Component {
     })
   }
 
-  renderHome = () => {
-    this.props.resetDisplayId()
-    this.setState({
-        createNew: false
-      })
+
+  showHome = (props) => {
+    return <div className="App-intro">
+      <NewSubject updateState={this.updateState} />
+      <ExistingDecks {...props}/>
+    </div>
   }
 
-  showComponent = () => {
-    if (this.props.displayId){
-      return <div><DisplayCards /></div>
-    }
-    else if (!this.state.createNew){
-      return <div className="App-intro">
-        <NewSubject updateState={this.updateState} />
-        <ExistingDecks />
-      </div>
-    }
-    else if (this.state.createNew && !this.state.editNew){
-      return <div className="App-intro">
-        <NewCardForm renderHome={this.renderHome}/>
-        <CurrentDeck setEditState={this.setEditState}/>
-      </div>
-    }
-    else if (this.state.createNew && this.state.editNew){
-      return <div>
-        <EditCard cardIndex={this.state.cardIndex} changeDisplay={this.changeDisplay}/>
-        <CurrentDeck setEditState={this.setEditState}/>
-      </div>
-    }
+  newSubject = (props) => {
+    return <div className="App-intro">
+      <NewCardForm {...props} renderHome={this.renderHome}/>
+      <CurrentDeck {...props} setEditState={this.setEditState}/>
+    </div>
   }
+
+  displayCards = () => {
+    return <div><DisplayCards /></div>
+  }
+
+  editNewCard = (props) => {
+    return <div>
+      <EditCard {...props} cardIndex={this.state.cardIndex} 
+        changeDisplay={this.changeDisplay}/>
+      <CurrentDeck {...props} setEditState={this.setEditState}/>
+    </div>
+  }
+
 
   render() {
+
     return (<div className="App">
               <header className="App-header">
                 <NavBar />
               </header>
-              <button onClick={this.renderHome} className="home-button">
-                Home
-              </button>
-              {this.showComponent()}
+              <Link to="/">
+                <button className="home-button">
+                  Home
+                </button>
+              </Link>
+              {/* {this.showComponent()} */}
+              <Switch>
+                <Route exact path="/" render={this.showHome}/>
+                <Route path="/new" render={this.newSubject}/>
+                <Route path="/display" render={this.displayCards}/>
+                <Route path="/edit-new" render={this.editNewCard}/>
+              </Switch>
             </div>);
   }
 }
 
 const mapStateToProps = (state) => {
   return {
+    userId: state.userId,
     displayId: state.displayId,
     currentDeck: state.currentDeck
   }
 }
+
 const mapDispatchToProps = (dispatch) => {
   return {
-    resetDisplayId: () => dispatch(resetDisplayId())
+    resetDisplayId: () => dispatch(resetDisplayId()),
+    fetchDecks: (id) => dispatch(fetchDecks(id))
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App))

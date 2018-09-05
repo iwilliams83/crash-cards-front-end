@@ -38,11 +38,11 @@ class EditCard extends Component {
         back: this.state.back
       }
       this.props.editCard(card, this.state.cardIndex)
-      this.props.changeDisplay()
+      this.props.history.push('/new')
     }
     else if (e.target.value === 'Delete') {
       this.props.deleteCard(this.state.cardIndex)
-      this.props.changeDisplay()
+      this.props.history.push('/new')
     }
 
   }

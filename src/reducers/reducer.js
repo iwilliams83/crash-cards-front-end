@@ -1,6 +1,6 @@
 const defaultState = {
   subject: '', currentDeck: [], displayId: null,
-  existingDecks: [], userId: 2
+  existingDecks: [], userId: 1
 }
 
 const rootReducer = (state = defaultState, action) => {

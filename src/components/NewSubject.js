@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { updateSubject } from '../actions/actions'
 import { connect } from 'react-redux'
-//import { bindActionCreators } from 'redux'
+import { Link } from 'react-router-dom'
 
 class NewSubject extends Component {
 
@@ -15,20 +15,28 @@ class NewSubject extends Component {
   }
 
   render(){
-    //console.log('NewSubject component props:', this.props.subject)
     return <div>
       <h3>Create a new deck, or view an existing deck!</h3>
-      <h4>Create a new deck of cards:</h4>
+      <p>To create a new deck, type in a subject and click submit.</p>
       <form>
         <label>
           Enter Subject:
           <input type="text" name="subject" onChange={this.handleChange}/>
         </label>
-        <input type="submit" value="Submit" onClick={this.clickHandler}/>
+        <Link to="/new" >
+          <button>Create Cards</button>
+          {/* <input type="submit" value="Submit" onClick={this.clickHandler}/> */}
+        </Link>
       </form>
     </div>
   }
 }
+
+{/* <Link to="/dashboard">
+    <button type="button">
+         Click Me!
+    </button>
+</Link> */}
 
 const mapStateToProps = (state) => {
 //console.log('state', state)

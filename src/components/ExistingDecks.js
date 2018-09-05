@@ -4,15 +4,11 @@ import { connect } from 'react-redux'
 import { storeCurrentDecks, fetchDecks, setDisplayId } from '../actions/actions'
 
 class ExistingDecks extends Component {
-  
-  componentDidMount() {
-    let id = this.props.userId
-    this.props.fetchDecks(id)
-  }
 
   clickHandler = (e) => {
     let deckId = e.target.id
     this.props.setDisplayId(deckId)
+    this.props.history.push('/display')
   }
 
   render(){
