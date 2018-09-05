@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import '../cardTray.css'
 import { connect } from 'react-redux'
 import checkmark from '../images/check-mark.png'
+import ScoreDisplay from './ScoreDisplay'
 //import {  } from '../actions/actions'
 
 class DisplayCards extends Component{
@@ -11,7 +12,8 @@ class DisplayCards extends Component{
     cardBack: '',
     showAnswer: false,
     done: false,
-    score: 0
+    score: 0,
+    displayScore: false
   }
 
   generatorIterator = this.getNextCard();
@@ -61,6 +63,11 @@ class DisplayCards extends Component{
         return {showAnswer: !prevState.showAnswer}
       })
     }
+    else if (e.target.innerText === 'My Score'){
+      this.setState({
+        displayScore: true
+      })
+    }
   }
 
   toggleCard = () => {
@@ -87,10 +94,19 @@ class DisplayCards extends Component{
     })
   }
 
+  showScore = () => {
+    if (this.state.displayScore){
+      return <ScoreDisplay score={this.state.score} />
+    }
+    else {
+      return <img src={checkmark} alt="check mark"/>
+    }
+  }
+
   render(){
     return <div className="display-card">
       <div className="checkmark" onClick={this.updateScore}>
-        <img src={checkmark} alt="check mark"/>
+        {this.showScore()}
       </div>
       <div className="card-dimensions">
         <div>{this.state.showAnswer ? this.state.cardBack : this.state.cardFront}</div>

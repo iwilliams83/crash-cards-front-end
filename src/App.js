@@ -70,7 +70,7 @@ class App extends Component {
 
   editNewCard = (props) => {
     return <div>
-      <EditCard {...props} cardIndex={this.state.cardIndex} 
+      <EditCard {...props} cardIndex={this.state.cardIndex}
         changeDisplay={this.changeDisplay}/>
       <CurrentDeck {...props} setEditState={this.setEditState}/>
     </div>
@@ -94,6 +94,7 @@ class App extends Component {
                 <Route path="/new" render={this.newSubject}/>
                 <Route path="/display" render={this.displayCards}/>
                 <Route path="/edit-new" render={this.editNewCard}/>
+                
               </Switch>
             </div>);
   }
