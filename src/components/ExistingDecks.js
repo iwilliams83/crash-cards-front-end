@@ -18,7 +18,7 @@ class ExistingDecks extends Component {
       {existingDecks.length > 0 && existingDecks.map((card, idx) => {
         return <div key={idx} className="card" id={idx}
           onClick={this.clickHandler}>
-          {card.subject}
+           {card.subject}
           </div>
         })}
     </div>
