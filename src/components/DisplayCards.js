@@ -3,7 +3,7 @@ import '../cardTray.css'
 import { connect } from 'react-redux'
 import checkmark from '../images/check-mark.png'
 import ScoreDisplay from './ScoreDisplay'
-//import {  } from '../actions/actions'
+//import { Link } from '../actions/actions'
 
 class DisplayCards extends Component{
 
@@ -31,7 +31,7 @@ class DisplayCards extends Component{
 
   displayNext = () => {
     let result = this.generatorIterator.next();
-    let id = parseInt(result.value.index)
+    let id = parseInt(result.value.index, 10)
     let arrLength = this.props.cardsToDisplay.length - 1
     if (!result.done && id <= arrLength){
       this.setState({
@@ -108,19 +108,17 @@ class DisplayCards extends Component{
 
   render(){
     return <div className="display-card">
-
-        {this.showScore()}
-
-      <div className="card-dimensions">
-        <div>{this.state.showAnswer ? this.state.cardBack : this.state.cardFront}</div>
-      </div>
-      <div>
-        {this.toggleCard()}
-        <br />
-        <br />
-          {this.toggleNext()}
-      </div>
-    </div>
+            {this.showScore()}
+          <div className="card-dimensions">
+            <div>{this.state.showAnswer ? this.state.cardBack : this.state.cardFront}</div>
+          </div>
+          <div>
+            {this.toggleCard()}
+            <br />
+            <br />
+              {this.toggleNext()}
+          </div>
+        </div>
   }
 }
 

@@ -33,16 +33,15 @@ class NewCardForm extends Component {
 
   createDeck = (e) => {
     e.preventDefault()
-   let subject = this.props.subject
-   let cards = this.props.currentDeck
-   let userId = this.props.userId
+    let subject = this.props.subject
+    let cards = this.props.currentDeck
+    let userId = this.props.userId
 
-   this.props.saveDeck(userId, subject, cards)
-   this.props.history.push('/')
+    this.props.saveDeck(userId, subject, cards)
+    this.props.history.push('/')
   }
 
   render(){
-    //console.log('do i have a history? lets find out', this.props)
     return <div >
             <h4>Create a new card for your {this.props.subject} deck:</h4>
             <form>

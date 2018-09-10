@@ -10,7 +10,7 @@ import CurrentDeck from './components/CurrentDeck'
 import DisplayCards from './components/DisplayCards'
 import {resetDisplayId, fetchDecks} from './actions/actions'
 import { withRouter } from 'react-router'
-import { Route, Switch, Link } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 
 
 class App extends Component {
@@ -65,7 +65,12 @@ class App extends Component {
   }
 
   displayCards = () => {
-    return <div><DisplayCards /></div>
+    return <div>
+      <div className="card-display"><DisplayCards /></div>
+        <div className="footer">
+          <div><button className="edit-button">Edit this deck</button></div>
+        </div>
+    </div>
   }
 
   editNewCard = (props) => {
@@ -76,19 +81,16 @@ class App extends Component {
     </div>
   }
 
-
   render() {
     return (<div className="App">
               <div className="App-header">
                 <NavBar />
               </div>
-              {/* {this.showComponent()} */}
               <Switch>
                 <Route exact path="/" render={this.showHome}/>
                 <Route path="/new" render={this.newSubject}/>
                 <Route path="/display" render={this.displayCards}/>
                 <Route path="/edit-new" render={this.editNewCard}/>
-
               </Switch>
             </div>);
   }

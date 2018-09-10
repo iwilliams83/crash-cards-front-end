@@ -44,7 +44,6 @@ class EditCard extends Component {
       this.props.deleteCard(this.state.cardIndex)
       this.props.history.push('/new')
     }
-
   }
 
   render(){

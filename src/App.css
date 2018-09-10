@@ -29,7 +29,28 @@
 .App-intro {
   font-size: large;
   width: 100%;
-  /* height: 300px; */
+}
+
+.card-display {
+  height: 300px;
+}
+
+.footer {
+  height: 200px;
+  background-color: #5cc2ba;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.edit-button {
+  background-color: #5a43d9;
+  border: solid #8d7af4;
+  height: 30px;
+  width: 100px;
+  color: white;
+  border-radius: 5px;
 }
 
 .buttons{

@@ -32,21 +32,12 @@ class NewSubject extends Component {
   }
 }
 
-{/* <Link to="/dashboard">
-    <button type="button">
-         Click Me!
-    </button>
-</Link> */}
-
 const mapStateToProps = (state) => {
-//console.log('state', state)
   return {subject: state.subject}
 }
 
 const mapDispatchToProps = (dispatch) => {
   return { updateSubject: (subj) => dispatch(updateSubject(subj)) }
 }
-
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewSubject)
