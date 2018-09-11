@@ -42,7 +42,6 @@ const rootReducer = (state = defaultState, action) => {
       return {...state, displayId: null}
 
     case 'EDIT_EXISTING':
-    console.log('in reducer, payload', action.payload )
       return {
         ...state,
         cardToEdit: action.payload.card,
@@ -52,15 +51,11 @@ const rootReducer = (state = defaultState, action) => {
     case 'SAVE_CHANGES':
       let idx = action.payload.deckIndex
       let deck = state.existingDecks[idx]
-      //console.log('in reducer, SAVE_CHANGES:', deck.cards)
       let editedCards = deck.cards.map(card => {
         if (card.id === action.payload.card.id) {
-          console.log('** card.id **:', card.id)
           return action.payload.card
         }
-        else {
-          return card
-        }
+        return card
       })
 
       let existingDecks = state.existingDecks.map((deck,i) => {
@@ -74,6 +69,13 @@ const rootReducer = (state = defaultState, action) => {
         ...state,
         existingDecks: existingDecks
       }
+    case 'DELETE_EXISTING':
+      // payload {cardId: 31, cardIndex: "0", deckIndex: "2"}
+      let deckIdx = action.payload.deckIndex
+      let cardIdx = action.payload.cardIndex
+      let cardToDelete = state.existingDecks[deckIdx]['cards'][cardIdx]
+      // ^^ GOT THE CARD TO DELETE! JUST NEED TO UPDATE STATE
+      return state
 
     default:
       return state

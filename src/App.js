@@ -86,7 +86,6 @@ class App extends Component {
   }
 
   render() {
-    //console.log('===== existingDecks', this.props.existingDecks)
     return (<div className="App">
               <div className="App-header">
                 <NavBar />
@@ -98,7 +97,7 @@ class App extends Component {
                 <Route path="/edit-new" render={this.editNewCard}/>
                 <Route path="/edit-existing" render={this.editExisting}/>
               </Switch>
-            </div>);
+            </div>)
   }
 }
 

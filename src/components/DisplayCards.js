@@ -3,8 +3,7 @@ import '../cardTray.css'
 import { connect } from 'react-redux'
 import checkmark from '../images/check-mark.png'
 import ScoreDisplay from './ScoreDisplay'
-//import { Link } from 'react-router-dom'
-import { editExisting } from '../actions/actions'
+import { editExisting, deleteSelected } from '../actions/actions'
 
 class DisplayCards extends Component{
 
@@ -16,7 +15,8 @@ class DisplayCards extends Component{
     score: 0,
     displayScore: false,
     card: {},
-    deckIndex: null
+    deckIndex: null,
+    cardIndex: null
   }
 
   generatorIterator = this.getNextCard();
@@ -42,7 +42,8 @@ class DisplayCards extends Component{
         cardFront: result.value.card.front,
         cardBack: result.value.card.back,
         card: result.value.card,
-        deckIndex: this.props.displayId
+        deckIndex: this.props.displayId,
+        cardIndex: result.value.index
       })
 
       if (id === arrLength) {
@@ -114,9 +115,15 @@ class DisplayCards extends Component{
   }
 
   handleEdit = () => {
-    //console.log('***deckIndex***:', this.state.deckIndex)
     this.props.editExisting(this.state.card, this.state.deckIndex)
     this.props.history.push('/edit-existing')
+  }
+
+  handleDelete = () => {
+    let deckIndex = this.state.deckIndex
+    let cardIndex = this.state.cardIndex
+    let cardId = this.state.card.id
+    this.props.deleteSelected(cardId, cardIndex, deckIndex)
   }
 
   render(){
@@ -139,6 +146,11 @@ class DisplayCards extends Component{
             Edit this card
           </button>
         </div>
+        <div>
+          <button className="edit-button" onClick={this.handleDelete}>
+            Delete this card
+          </button>
+        </div>
       </div>
     </React.Fragment>
   }
@@ -154,7 +166,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    editExisting: (card, idx) => dispatch(editExisting(card, idx))
+    editExisting: (card, idx) => dispatch(editExisting(card, idx)),
+    deleteSelected: (cardId, cardIndex, deckIndex) => dispatch(deleteSelected(cardId, cardIndex, deckIndex))
   }
 }
 

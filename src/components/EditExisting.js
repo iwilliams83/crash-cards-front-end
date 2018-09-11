@@ -29,24 +29,21 @@ class EditExisting extends Component {
 
   clickHandler = (e) => {
     e.preventDefault()
-    if (e.target.value === 'Submit'){
+    if (e.target.value === 'Save Changes'){
       const cardToSubmit = {
         ...this.state.card,
         front: this.state.front,
         back: this.state.back
       }
-      //console.log('--- cardToSubmit', cardToSubmit)
       this.props.saveEditedCard(cardToSubmit, this.props.deckIndex)
-      //this.props.editExisting(card, this.state.cardIndex)
       this.props.history.push('/display')
     }
-    else if (e.target.value === 'Delete') {
-      //this.props.deleteCard(this.state.cardIndex)
-      //this.props.history.push('/new')
-    }
+    // else if (e.target.value === 'Delete') {
+    //   //this.props.deleteCard(this.state.cardIndex)
+    //   //this.props.history.push('/display')
+    // }
   }
   render(){
-    //console.log('card to edit',this.props.card)
     return <div >
             <h4>Edit or Delete Card:</h4>
             <form>
@@ -59,11 +56,10 @@ class EditExisting extends Component {
               <label>
                 Card Back:
                 <input type="text" name="back"
-                          onChange={this.handleChange} value={this.state.back}/>
+                       onChange={this.handleChange} value={this.state.back}/>
               </label>
 
-              <input type="submit" value="Submit" onClick={this.clickHandler}/>
-              <input type="submit" value="Delete" onClick={this.clickHandler}/>
+              <input type="submit" value="Save Changes" onClick={this.clickHandler}/>
             </form>
 
           </div>

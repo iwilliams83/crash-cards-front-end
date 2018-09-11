@@ -8,6 +8,7 @@ export const addCard = (card) => {
       payload: { card }
     }
 }
+
 // edit a card while you are creating a deck
 export const editCard = (card, id) => {
   return {
@@ -16,6 +17,7 @@ export const editCard = (card, id) => {
   }
 }
 
+// delete card while creating deck
 export const deleteCard = (id) => {
   return {
     type: 'DELETE_CARD',
@@ -50,6 +52,7 @@ export const resetDisplayId = () => {
   }
 }
 
+//edit an existing card
 export const editExisting = (card, deckIndex) => {
   return {
     type: 'EDIT_EXISTING',
@@ -57,8 +60,14 @@ export const editExisting = (card, deckIndex) => {
   }
 }
 
+export const deleteExisting = (cardId, cardIndex, deckIndex) => {
+  return {
+    type: 'DELETE_EXISTING',
+    payload: {cardId, cardIndex, deckIndex}
+  }
+}
+
 export const saveChanges = (card, deckIndex) => {
-  console.log('hitting saveChanges', card, deckIndex)
   return {
     type: 'SAVE_CHANGES',
     payload: {card, deckIndex}
@@ -87,7 +96,6 @@ export function saveDeck(userId, subject, cards){
 }
 
 export function saveEditedCard(card, deckIndex){
-  //console.log('hitting action', card, deckIndex)
   return function(dispatch){
      dispatch(saveChanges(card, deckIndex))
      return fetch(`http://localhost:3000/api/v1/cards/${card.id}`, {
@@ -96,6 +104,19 @@ export function saveEditedCard(card, deckIndex){
         'Accept': 'application/json',
         'Content-Type': 'application/json'},
       body: JSON.stringify({card})
+    })
+  }
+}
+
+export function deleteSelected(cardId, cardIndex, deckIndex){
+  return function(dispatch){
+    dispatch(deleteExisting(cardId, cardIndex, deckIndex))
+    return fetch(`http://localhost:3000/api/v1/cards/${cardId}`, {
+      method: "DELETE",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'},
+      body: JSON.stringify({cardId})
     })
   }
 }
