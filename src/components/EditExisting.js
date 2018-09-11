@@ -1,23 +1,20 @@
 import React, { Component } from 'react'
-import '../cardTray.css'
-import { editCard, deleteCard } from '../actions/actions'
+import { saveEditedCard } from '../actions/actions'
 import { connect } from 'react-redux'
 
-
-class EditCard extends Component {
+class EditExisting extends Component {
   state = {
     cardIndex: null,
     front: '',
-    back: ''
+    back: '',
+    card: {}
   }
 
   componentDidMount = () => {
-    let i = this.props.cardIndex
-    let card = this.props.currentDeck[i]
     this.setState({
-      cardIndex: i,
-      front: card.front,
-      back: card.back
+      card: this.props.card,
+      front: this.props.card.front,
+      back: this.props.card.back
     });
   }
 
@@ -33,20 +30,23 @@ class EditCard extends Component {
   clickHandler = (e) => {
     e.preventDefault()
     if (e.target.value === 'Submit'){
-      const card = {
+      const cardToSubmit = {
+        ...this.state.card,
         front: this.state.front,
         back: this.state.back
       }
-      this.props.editCard(card, this.state.cardIndex)
-      this.props.history.push('/new')
+      //console.log('--- cardToSubmit', cardToSubmit)
+      this.props.saveEditedCard(cardToSubmit, this.props.deckIndex)
+      //this.props.editExisting(card, this.state.cardIndex)
+      this.props.history.push('/display')
     }
     else if (e.target.value === 'Delete') {
-      this.props.deleteCard(this.state.cardIndex)
-      this.props.history.push('/new')
+      //this.props.deleteCard(this.state.cardIndex)
+      //this.props.history.push('/new')
     }
   }
-
   render(){
+    //console.log('card to edit',this.props.card)
     return <div >
             <h4>Edit or Delete Card:</h4>
             <form>
@@ -72,15 +72,14 @@ class EditCard extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    currentDeck: state.currentDeck
+    deckIndex: state.deckIndex
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    editCard: (card, id) => dispatch(editCard(card, id)),
-    deleteCard: (id) => dispatch(deleteCard(id))
+    saveEditedCard: (card, idx) => dispatch(saveEditedCard(card, idx))
   }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(EditCard)
+export default connect(mapStateToProps, mapDispatchToProps)(EditExisting)

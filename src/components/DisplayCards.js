@@ -3,7 +3,8 @@ import '../cardTray.css'
 import { connect } from 'react-redux'
 import checkmark from '../images/check-mark.png'
 import ScoreDisplay from './ScoreDisplay'
-//import { Link } from '../actions/actions'
+//import { Link } from 'react-router-dom'
+import { editExisting } from '../actions/actions'
 
 class DisplayCards extends Component{
 
@@ -13,7 +14,9 @@ class DisplayCards extends Component{
     showAnswer: false,
     done: false,
     score: 0,
-    displayScore: false
+    displayScore: false,
+    card: {},
+    deckIndex: null
   }
 
   generatorIterator = this.getNextCard();
@@ -33,11 +36,15 @@ class DisplayCards extends Component{
     let result = this.generatorIterator.next();
     let id = parseInt(result.value.index, 10)
     let arrLength = this.props.cardsToDisplay.length - 1
+
     if (!result.done && id <= arrLength){
       this.setState({
         cardFront: result.value.card.front,
-        cardBack: result.value.card.back
+        cardBack: result.value.card.back,
+        card: result.value.card,
+        deckIndex: this.props.displayId
       })
+
       if (id === arrLength) {
         this.setState({
           done: true
@@ -106,8 +113,15 @@ class DisplayCards extends Component{
     }
   }
 
+  handleEdit = () => {
+    //console.log('***deckIndex***:', this.state.deckIndex)
+    this.props.editExisting(this.state.card, this.state.deckIndex)
+    this.props.history.push('/edit-existing')
+  }
+
   render(){
-    return <div className="display-card">
+    return <React.Fragment>
+      <div className="display-card">
             {this.showScore()}
           <div className="card-dimensions">
             <div>{this.state.showAnswer ? this.state.cardBack : this.state.cardFront}</div>
@@ -118,10 +132,17 @@ class DisplayCards extends Component{
             <br />
               {this.toggleNext()}
           </div>
+      </div>
+      <div className="footer">
+        <div>
+          <button className="edit-button" onClick={this.handleEdit}>
+            Edit this card
+          </button>
         </div>
+      </div>
+    </React.Fragment>
   }
 }
-
 
 const mapStateToProps = (state) => {
   return {
@@ -131,4 +152,10 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(DisplayCards)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    editExisting: (card, idx) => dispatch(editExisting(card, idx))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DisplayCards)

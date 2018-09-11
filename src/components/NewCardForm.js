@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import '../cardTray.css'
 import { addCard, saveDeck } from '../actions/actions'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+//import { Link } from 'react-router-dom'
 
 
 class NewCardForm extends Component {

@@ -8,7 +8,7 @@ export const addCard = (card) => {
       payload: { card }
     }
 }
-
+// edit a card while you are creating a deck
 export const editCard = (card, id) => {
   return {
     type: 'EDIT_CARD',
@@ -30,10 +30,10 @@ export const storeCurrentDecks = (deckObjects) => {
   }
 }
 
-export const newDeck = (userId, subject, cards) => {
+export const newDeck = (subject, cards) => {
   return {
     type: 'NEW_DECK',
-    payload: {['user-id']: userId, subject, cards}
+    payload: {subject, cards}
   }
 }
 
@@ -43,13 +43,27 @@ export const setDisplayId = (deckId) => {
     payload: deckId
   }
 }
+
 export const resetDisplayId = () => {
   return {
     type: 'RESET_DISPLAY_ID'
   }
 }
 
+export const editExisting = (card, deckIndex) => {
+  return {
+    type: 'EDIT_EXISTING',
+    payload: {card, deckIndex}
+  }
+}
 
+export const saveChanges = (card, deckIndex) => {
+  console.log('hitting saveChanges', card, deckIndex)
+  return {
+    type: 'SAVE_CHANGES',
+    payload: {card, deckIndex}
+  }
+}
 
 export function fetchDecks(id){
   return function(dispatch) {
@@ -72,8 +86,16 @@ export function saveDeck(userId, subject, cards){
   }
 }
 
-//
-// export const fetchDecks = (id) => (dispatch) =>
-//      fetch(`http://localhost:3000/api/v1/users/${id}`)
-//       .then(res => res.json())
-//         .then(res => dispatch(storeCurrentDecks(res)))
+export function saveEditedCard(card, deckIndex){
+  //console.log('hitting action', card, deckIndex)
+  return function(dispatch){
+     dispatch(saveChanges(card, deckIndex))
+     return fetch(`http://localhost:3000/api/v1/cards/${card.id}`, {
+      method: "PATCH",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'},
+      body: JSON.stringify({card})
+    })
+  }
+}

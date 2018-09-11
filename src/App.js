@@ -6,11 +6,12 @@ import NewSubject from './components/NewSubject'
 import NewCardForm from './components/NewCardForm'
 import ExistingDecks from './components/ExistingDecks'
 import EditCard from './components/EditCard'
+import EditExisting from './components/EditExisting'
 import CurrentDeck from './components/CurrentDeck'
 import DisplayCards from './components/DisplayCards'
 import {resetDisplayId, fetchDecks} from './actions/actions'
 import { withRouter } from 'react-router'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch} from 'react-router-dom'
 
 
 class App extends Component {
@@ -64,12 +65,9 @@ class App extends Component {
     </div>
   }
 
-  displayCards = () => {
+  displayCards = (props) => {
     return <div>
-      <div className="card-display"><DisplayCards /></div>
-        <div className="footer">
-          <div><button className="edit-button">Edit this deck</button></div>
-        </div>
+      <div className="card-display"><DisplayCards {...props}/></div>
     </div>
   }
 
@@ -81,7 +79,14 @@ class App extends Component {
     </div>
   }
 
+  editExisting = (props) => {
+    return <div>
+      <EditExisting card={this.props.cardToEdit} deckIndex={this.props.deckIndex} {...props}/>
+    </div>
+  }
+
   render() {
+    //console.log('===== existingDecks', this.props.existingDecks)
     return (<div className="App">
               <div className="App-header">
                 <NavBar />
@@ -91,6 +96,7 @@ class App extends Component {
                 <Route path="/new" render={this.newSubject}/>
                 <Route path="/display" render={this.displayCards}/>
                 <Route path="/edit-new" render={this.editNewCard}/>
+                <Route path="/edit-existing" render={this.editExisting}/>
               </Switch>
             </div>);
   }
@@ -100,7 +106,9 @@ const mapStateToProps = (state) => {
   return {
     userId: state.userId,
     displayId: state.displayId,
-    currentDeck: state.currentDeck
+    currentDeck: state.currentDeck,
+    cardToEdit: state.cardToEdit,
+    deckIndex: state.deckIndex
   }
 }
 

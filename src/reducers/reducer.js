@@ -1,6 +1,7 @@
 const defaultState = {
   subject: '', currentDeck: [], displayId: null,
-  existingDecks: [], userId: 1
+  existingDecks: [], userId: 1, cardToEdit: [],
+  deckIndex: null
 }
 
 const rootReducer = (state = defaultState, action) => {
@@ -39,6 +40,40 @@ const rootReducer = (state = defaultState, action) => {
 
     case 'RESET_DISPLAY_ID':
       return {...state, displayId: null}
+
+    case 'EDIT_EXISTING':
+    console.log('in reducer, payload', action.payload )
+      return {
+        ...state,
+        cardToEdit: action.payload.card,
+        deckIndex: action.payload.deckIndex
+      }
+
+    case 'SAVE_CHANGES':
+      let idx = action.payload.deckIndex
+      let deck = state.existingDecks[idx]
+      //console.log('in reducer, SAVE_CHANGES:', deck.cards)
+      let editedCards = deck.cards.map(card => {
+        if (card.id === action.payload.card.id) {
+          console.log('** card.id **:', card.id)
+          return action.payload.card
+        }
+        else {
+          return card
+        }
+      })
+
+      let existingDecks = state.existingDecks.map((deck,i) => {
+        if (i === parseInt(idx, 10)) {
+          deck.cards = editedCards
+        }
+        return deck
+      })
+
+      return {
+        ...state,
+        existingDecks: existingDecks
+      }
 
     default:
       return state
