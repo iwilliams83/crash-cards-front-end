@@ -38,14 +38,10 @@ class EditExisting extends Component {
       this.props.saveEditedCard(cardToSubmit, this.props.deckIndex)
       this.props.history.push('/display')
     }
-    // else if (e.target.value === 'Delete') {
-    //   //this.props.deleteCard(this.state.cardIndex)
-    //   //this.props.history.push('/display')
-    // }
   }
   render(){
     return <div >
-            <h4>Edit or Delete Card:</h4>
+            <h4>Edit Card:</h4>
             <form>
               <label>
                 Card Front:

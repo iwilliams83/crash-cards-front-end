@@ -12,7 +12,7 @@
 
 .App-header {
   background-color: #5cc2ba;
-  height: 50px;
+  height: 60px;
   padding: 20px;
   color: black;
 }
@@ -36,7 +36,7 @@
 }
 
 .buttons{
-  background-color: #6b58d3;
+  background-color: #5a43d9;
   height: 30px;
   width: 50px;
   color: white;
@@ -45,12 +45,20 @@
 }
 
 .display-buttons{
-  background-color: #6b58d3;
+  background-color: #5a43d9;
   height: 40px;
   width: 60px;
   color: white;
   border: solid #8d7af5;
   border-radius: 5px;
+}
+
+.home-page {
+  height: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
 }
 
 @keyframes App-logo-spin {

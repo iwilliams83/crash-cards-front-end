@@ -1,7 +1,7 @@
 const defaultState = {
   subject: '', currentDeck: [], displayId: null,
   existingDecks: [], userId: 1, cardToEdit: [],
-  deckIndex: null
+  deckIndex: null, deckId: null
 }
 
 const rootReducer = (state = defaultState, action) => {
@@ -84,7 +84,6 @@ const rootReducer = (state = defaultState, action) => {
         let allDecks = state.existingDecks.filter((deck,i) => {
           return i !== parseInt(deckIdx)
         })
-        // debugger
         return {
           ...state, existingDecks: allDecks
         }
@@ -100,8 +99,24 @@ const rootReducer = (state = defaultState, action) => {
         }
       }
 
+    case 'SET_DECK_ID':
+      return {...state, deckId: action.payload.deckId, deckIndex: action.payload.deckIndex}
 
+    case 'ADD_TO_EXISTING':
+    
+      let cardToSave = action.payload.card
+      let deckIndx = state.deckIndex
+      let deckToUpdate = {...state.existingDecks[deckIndx]}
+      deckToUpdate.cards.push(cardToSave)
 
+      let updatedDecks = state.existingDecks.map((deck, i) => {
+        if (i === deckIndx){
+          return deckToUpdate
+        }
+        return deck
+      })
+
+      return {...state, existingDecks: updatedDecks}
 
     default:
       return state

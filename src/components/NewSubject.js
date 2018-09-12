@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { updateSubject } from '../actions/actions'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import '../App.css';
 
 class NewSubject extends Component {
 
@@ -15,19 +16,21 @@ class NewSubject extends Component {
   }
 
   render(){
-    return <div className="App-intro">
-      <h3>Create a new deck, or view an existing deck!</h3>
-      <p>To create a new deck, type in a subject and click submit.</p>
-      <form>
-        <label>
-          Enter Subject:
-          <input type="text" name="subject" onChange={this.handleChange}/>
-        </label>
-        <Link to="/new" >
-          <button>Create Cards</button>
-          {/* <input type="submit" value="Submit" onClick={this.clickHandler}/> */}
-        </Link>
-      </form>
+    return <div className="home-page">
+            <div>
+              <h3>Create a new deck or view an existing deck!</h3>
+              <p>To create a new deck, type in a subject and click submit.</p>
+              <form>
+                <label>
+                  Enter Subject:
+                  <input type="text" name="subject" onChange={this.handleChange}/>
+                </label>
+                <Link to="/new" >
+                  <button>Create Cards</button>
+                </Link>
+              </form>
+            </div>
+          <div><p>To view an existing deck, click on a title below:</p></div>
     </div>
   }
 }

@@ -3,7 +3,7 @@ import '../cardTray.css'
 import { connect } from 'react-redux'
 import checkmark from '../images/check-mark.png'
 import ScoreDisplay from './ScoreDisplay'
-import { editExisting, deleteSelected } from '../actions/actions'
+import { editExisting, deleteSelected, setDeckId } from '../actions/actions'
 
 class DisplayCards extends Component{
 
@@ -127,6 +127,13 @@ class DisplayCards extends Component{
     this.props.history.push('/')
   }
 
+  handleAddCard = () => {
+    let deckIndex = this.state.deckIndex
+    let deckId = this.state.card.deck_id
+    this.props.setDeckId(deckId, deckIndex)
+    this.props.history.push('/add-new')
+  }
+
   render(){
     return <React.Fragment>
       <div className="display-card">
@@ -145,6 +152,11 @@ class DisplayCards extends Component{
         <div>
           <button className="edit-button" onClick={this.handleEdit}>
             Edit this card
+          </button>
+        </div>
+        <div>
+          <button className="edit-button" onClick={this.handleAddCard}>
+            Add new card
           </button>
         </div>
         <div>
@@ -167,6 +179,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    setDeckId: (id, index) => dispatch(setDeckId(id, index)),
     editExisting: (card, idx) => dispatch(editExisting(card, idx)),
     deleteSelected: (cardId, cardIndex, deckIndex) => dispatch(deleteSelected(cardId, cardIndex, deckIndex))
   }

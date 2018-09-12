@@ -67,6 +67,23 @@ export const deleteExisting = (cardId, cardIndex, deckIndex) => {
   }
 }
 
+export const setDeckId = (deckId, deckIndex) => {
+  return {
+    type: 'SET_DECK_ID',
+    payload: {deckId, deckIndex}
+  }
+}
+
+export const addToExisting = (card, deckId) => {
+  console.log('hitting action')
+  console.log('=== card ===', card)
+  console.log('=== deckId ===', deckId)
+  return {
+    type: 'ADD_TO_EXISTING',
+    payload: {card, deckId}
+  }
+}
+
 export const saveChanges = (card, deckIndex) => {
   return {
     type: 'SAVE_CHANGES',
@@ -91,8 +108,8 @@ export function saveDeck(userId, subject, cards){
         'Content-Type': 'application/json'},
       body: JSON.stringify({userId, subject, cards})
     })
-    .then(r => r.json())
-    .then(json => dispatch(newDeck(json.data.attributes.subject, json.data.attributes.cards)))
+    .then(res => res.json())
+    .then(res => dispatch(newDeck(res.data.attributes.subject, res.data.attributes.cards)))
   }
 }
 
@@ -118,6 +135,19 @@ export function deleteSelected(cardId, cardIndex, deckIndex){
         'Accept': 'application/json',
         'Content-Type': 'application/json'},
       body: JSON.stringify({cardId})
+    })
+  }
+}
+
+export function saveNewCard(card, deckId){
+  return function(dispatch){
+     dispatch(addToExisting(card, deckId))
+     return fetch(`http://localhost:3000/api/v1/cards`, {
+      method: "POST",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'},
+      body: JSON.stringify({card, deckId})
     })
   }
 }

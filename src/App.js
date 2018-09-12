@@ -9,6 +9,7 @@ import EditCard from './components/EditCard'
 import EditExisting from './components/EditExisting'
 import CurrentDeck from './components/CurrentDeck'
 import DisplayCards from './components/DisplayCards'
+import AddNewCard from './components/AddNewCard'
 import {resetDisplayId, fetchDecks} from './actions/actions'
 import { withRouter } from 'react-router'
 import { Route, Switch} from 'react-router-dom'
@@ -85,6 +86,12 @@ class App extends Component {
     </div>
   }
 
+  addNewCard = (props) => {
+    return <div>
+      <AddNewCard {...props}/>
+    </div>
+  }
+
   render() {
     return (<div className="App">
               <div className="App-header">
@@ -93,6 +100,7 @@ class App extends Component {
               <Switch>
                 <Route exact path="/" render={this.showHome}/>
                 <Route path="/new" render={this.newSubject}/>
+                <Route path="/add-new" render={this.addNewCard}/>
                 <Route path="/display" render={this.displayCards}/>
                 <Route path="/edit-new" render={this.editNewCard}/>
                 <Route path="/edit-existing" render={this.editExisting}/>
