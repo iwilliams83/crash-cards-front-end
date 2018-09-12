@@ -124,6 +124,7 @@ class DisplayCards extends Component{
     let cardIndex = this.state.cardIndex
     let cardId = this.state.card.id
     this.props.deleteSelected(cardId, cardIndex, deckIndex)
+    this.props.history.push('/')
   }
 
   render(){

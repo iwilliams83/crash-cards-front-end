@@ -70,12 +70,38 @@ const rootReducer = (state = defaultState, action) => {
         existingDecks: existingDecks
       }
     case 'DELETE_EXISTING':
-      // payload {cardId: 31, cardIndex: "0", deckIndex: "2"}
       let deckIdx = action.payload.deckIndex
       let cardIdx = action.payload.cardIndex
-      let cardToDelete = state.existingDecks[deckIdx]['cards'][cardIdx]
-      // ^^ GOT THE CARD TO DELETE! JUST NEED TO UPDATE STATE
-      return state
+      let cards = state.existingDecks[deckIdx]['cards']
+      let cardToDelete = cards[cardIdx]
+
+      let filteredCards = cards.filter(card => {
+        if (card !== cardToDelete) {
+          return card
+        }
+      })
+      if (filteredCards.length === 0) {
+        let allDecks = state.existingDecks.filter((deck,i) => {
+          return i !== parseInt(deckIdx)
+        })
+        // debugger
+        return {
+          ...state, existingDecks: allDecks
+        }
+      } else {
+        let allDecks = state.existingDecks.map((deck,i) => {
+          if (i === parseInt(deckIdx, 10)) {
+            deck.cards = filteredCards
+          }
+          return deck
+        })
+        return {
+          ...state, existingDecks: allDecks
+        }
+      }
+
+
+
 
     default:
       return state

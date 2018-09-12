@@ -83,8 +83,7 @@ export function fetchDecks(id){
 }
 
 export function saveDeck(userId, subject, cards){
-  return function(dispatch){
-    dispatch(newDeck(userId, subject, cards))
+  return (dispatch) => {
     return fetch(`http://localhost:3000/api/v1/decks`, {
       method: "POST",
       headers: {
@@ -92,6 +91,8 @@ export function saveDeck(userId, subject, cards){
         'Content-Type': 'application/json'},
       body: JSON.stringify({userId, subject, cards})
     })
+    .then(r => r.json())
+    .then(json => dispatch(newDeck(json.data.attributes.subject, json.data.attributes.cards)))
   }
 }
 
