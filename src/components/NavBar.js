@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 export default class NavBar extends Component {
   render(){
     return <div className="App-logo">
-            <div></div>
+            <div className="greeting"><h3>Welcome Person!</h3></div>
             <div> <img src={logo} alt="crash cards logo"/> </div>
             <div>
               <Link to="/">

@@ -19,7 +19,7 @@ class NewSubject extends Component {
     return <div className="home-page">
             <div>
               <h3>Create a new deck or view an existing deck!</h3>
-              <p>To create a new deck, type in a subject and click submit.</p>
+              <p>To create a new deck, type in a subject and click submit to add cards...</p>
               <form>
                 <label>
                   Enter Subject:

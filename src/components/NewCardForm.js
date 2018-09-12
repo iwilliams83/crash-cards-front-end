@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import '../cardTray.css'
+import '../App.css';
 import { addCard, saveDeck } from '../actions/actions'
 import { connect } from 'react-redux'
 //import { Link } from 'react-router-dom'
@@ -42,9 +43,10 @@ class NewCardForm extends Component {
   }
 
   render(){
-    return <div >
-            <h4>Create a new card for your {this.props.subject} deck:</h4>
-            <form>
+    return <div className="new-card-page">
+            <div><h4>Create a new card for your {this.props.subject} deck:</h4></div>
+            <div>
+              <form>
               <label>
                 Card Front:
                 <input type="text" name="front" onChange={this.handleChange} value={this.state.front}/>
@@ -54,11 +56,18 @@ class NewCardForm extends Component {
                 Card Back:
                 <input type="text" name="back" onChange={this.handleChange} value={this.state.back}/>
               </label>
-
-              <input type="submit" value="Add Card" onClick={this.createCard}/>
-              <br />
-              <input type="submit" value="Save Deck" onClick={this.createDeck}/>
             </form>
+          </div>
+            <div className="add-save-buttons" >
+              <button className="add-save" type="submit" value="Add Card" onClick={this.createCard}>
+                Add Card
+              </button>
+              <button className="add-save" type="submit" value="Save Deck" onClick={this.createDeck}>
+                Save Deck
+              </button>
+            </div>
+
+
 
           </div>
   }

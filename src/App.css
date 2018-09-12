@@ -44,6 +44,23 @@
   border-radius: 5px;
 }
 
+.add-save-buttons{
+  display: flex;
+  justify-content: space-evenly;
+  padding-left: 200px;
+  padding-right: 200px;
+}
+
+.add-save{
+  background-color: #5a43d9;
+  height: 30px;
+  width: 50px;
+  color: white;
+  border: solid #8d7af5;
+  border-radius: 5px;
+  width: 100px;
+}
+
 .display-buttons{
   background-color: #5a43d9;
   height: 40px;
@@ -53,12 +70,24 @@
   border-radius: 5px;
 }
 
+.greeting {
+  color: #5a43d9;
+}
+
 .home-page {
-  height: 350px;
+  height: 325px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  color: #5a43d9;
+}
 
+.new-card-page {
+  height: 325px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  color: #5a43d9;
 }
 
 @keyframes App-logo-spin {
