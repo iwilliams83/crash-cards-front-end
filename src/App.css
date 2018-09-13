@@ -31,29 +31,6 @@
   width: 100%;
 }
 
-.card-display {
-  height: 300px;
-}
-
-.buttons{
-  background-color: #5a43d9;
-  height: 30px;
-  width: 50px;
-  color: white;
-  border: solid #8d7af5;
-  border-radius: 5px;
-}
-
-.create-button{
-  background-color: #5a43d9;
-  height: 30px;
-  width: 100px;
-  color: white;
-  border: solid #8d7af5;
-  border-radius: 5px;
-  font-size: 12px;
-}
-
 .add-save-buttons{
   display: flex;
   justify-content: space-evenly;
@@ -71,6 +48,30 @@
   width: 100px;
 }
 
+.buttons{
+  background-color: #5a43d9;
+  height: 30px;
+  width: 50px;
+  color: white;
+  border: solid #8d7af5;
+  border-radius: 5px;
+}
+
+.card-display {
+  height: 300px;
+  padding-top: 30px;
+}
+
+.create-button{
+  background-color: #5a43d9;
+  height: 30px;
+  width: 100px;
+  color: white;
+  border: solid #8d7af5;
+  border-radius: 5px;
+  font-size: 12px;
+}
+
 .display-buttons{
   background-color: #5a43d9;
   height: 40px;
@@ -79,6 +80,7 @@
   border: solid #8d7af5;
   border-radius: 5px;
 }
+
 
 .greeting {
   color: #5a43d9;
@@ -100,6 +102,16 @@
   color: #5a43d9;
 }
 
+.save-button{
+  background-color: #5a43d9;
+  height: 40px;
+  width: 100px;
+  color: white;
+  border: solid #8d7af5;
+  border-radius: 5px;
+  font-size: 12px;
+}
+
 .ui.input>input{
   background: rgba(222, 216, 216, 0.47);
   border: 2px solid #8d7af5bd;
@@ -107,6 +119,7 @@
   border-radius: .28571429rem;
   height: 2em;
   width: 200px;
+  font-size: larger;
   margin-bottom: 10px;
 }
 

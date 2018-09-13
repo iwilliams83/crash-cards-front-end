@@ -30,8 +30,8 @@
 }
 
 .card-dimensions{
-  height: 90%;
-  width: 15%;
+  height: 100%;
+  width: 18%;
   border: solid 2px #8d7af5;
   border-radius: 10px;
   display: flex;

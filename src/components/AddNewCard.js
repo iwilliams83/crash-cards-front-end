@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import '../cardTray.css'
 import { addCard, saveDeck, saveNewCard } from '../actions/actions'
 import { connect } from 'react-redux'
+import '../custom.css';
+import { Input } from 'semantic-ui-react'
 
 class AddNewCard extends Component {
 
@@ -29,23 +31,36 @@ class AddNewCard extends Component {
   }
 
   render(){
-    return <div >
-            <h4>Create a new card:</h4>
-            <form>
-              <label>
-                Card Front:
-                <input type="text" name="front" onChange={this.handleChange} value={this.state.front}/>
-              </label>
+    return <React.Fragment>
+      <div className="form">
+        <h4>Create a new card:</h4>
+          <form>
+            <div className="edit-inputs">
+              <div>
+                <label>
+                  Card Front:
+                  <Input type="text" name="front" onChange={this.handleChange} value={this.state.front}/>
+                </label>
+              </div>
+              <div>
+                <label>
+                  Card Back:
+                  <Input type="text" name="back" onChange={this.handleChange} value={this.state.back}/>
+                </label>
+              </div>
+            </div>
 
-              <label>
-                Card Back:
-                <input type="text" name="back" onChange={this.handleChange} value={this.state.back}/>
-              </label>
+            <div>
+              <button className="save-button" type="submit" value="Save to deck" onClick={this.createCard}>
+                Save to Deck
+              </button>
+            </div>
 
-              <input type="submit" value="Save to deck" onClick={this.createCard}/>
             </form>
 
           </div>
+          <div className="footer"></div>
+        </React.Fragment>
   }
 }
 

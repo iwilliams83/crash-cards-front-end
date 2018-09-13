@@ -1,0 +1,25 @@
+.form{
+  height: 300px;
+  color: #5a43d9;
+}
+
+.edit-inputs{
+  display: flex;
+  justify-content: space-evenly;
+  height: 100px;
+}
+
+.footer{
+  background-color: #5cc2ba;
+  height: 200px;
+}
+
+.ui.input>input{
+  background: rgba(222, 216, 216, 0.47);
+  border: 2px solid #8d7af5bd;
+  color: rgba(0,0,0,.87);
+  border-radius: .28571429rem;
+  height: 4em;
+  width: 250px;
+  margin-bottom: 10px;
+}

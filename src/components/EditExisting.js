@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { saveEditedCard } from '../actions/actions'
 import { connect } from 'react-redux'
+import '../custom.css';
+import { Input } from 'semantic-ui-react'
 
 class EditExisting extends Component {
   state = {
@@ -40,25 +42,38 @@ class EditExisting extends Component {
     }
   }
   render(){
-    return <div >
+    return <React.Fragment>
+      <div className="form">
             <h4>Edit Card:</h4>
             <form>
-              <label>
-                Card Front:
-                <input type="text" name="front"
-                          onChange={this.handleChange} value={this.state.front}/>
-              </label>
+            <div className="edit-inputs">
 
-              <label>
-                Card Back:
-                <input type="text" name="back"
-                       onChange={this.handleChange} value={this.state.back}/>
-              </label>
+                <div >
+                  <label>
+                    Card Front:
+                    <Input type="text" name="front"
+                              onChange={this.handleChange} value={this.state.front}/>
+                  </label>
+                </div>
+                <div >
+                  <label>
+                    Card Back:
+                    <Input type="text" name="back"
+                           onChange={this.handleChange} value={this.state.back}/>
+                  </label>
+                </div>
 
-              <input type="submit" value="Save Changes" onClick={this.clickHandler}/>
-            </form>
-
+            </div>
+              </form>
+              <div >
+                <button className="save-button" type="submit" value="Save Changes" onClick={this.clickHandler}>
+                Save Changes
+              </button>
+            </div>
           </div>
+          <div className="footer"></div>
+          </React.Fragment>
+
   }
 }
 
