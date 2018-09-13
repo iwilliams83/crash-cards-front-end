@@ -3,6 +3,7 @@ import { updateSubject } from '../actions/actions'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import '../App.css';
+import { Input } from 'semantic-ui-react'
 
 class NewSubject extends Component {
 
@@ -23,10 +24,10 @@ class NewSubject extends Component {
               <form>
                 <label>
                   Enter Subject:
-                  <input type="text" name="subject" onChange={this.handleChange}/>
+                  <Input type="text" name="subject" onChange={this.handleChange}/>
                 </label>
                 <Link to="/new" >
-                  <button>Create Cards</button>
+                  <button className="create-button">Create Cards</button>
                 </Link>
               </form>
             </div>
