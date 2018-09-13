@@ -47,6 +47,10 @@
   border-radius: 5px;
 }
 
+.checkmark:hover {
+  box-shadow: none;
+}
+
 .checkmark img {
   height: 75px;
   border: solid 3px #8d7af5;

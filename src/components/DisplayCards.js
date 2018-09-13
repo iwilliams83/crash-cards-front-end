@@ -16,7 +16,8 @@ class DisplayCards extends Component{
     displayScore: false,
     card: {},
     deckIndex: null,
-    cardIndex: null
+    cardIndex: null,
+    clicked: false
   }
 
   generatorIterator = this.getNextCard();
@@ -98,7 +99,9 @@ class DisplayCards extends Component{
 
   updateScore = () => {
     this.setState(prevState => {
-      return {score: prevState.score + 1}
+      return {
+        score: prevState.score + 1
+      }
     })
   }
 
@@ -108,7 +111,9 @@ class DisplayCards extends Component{
       return <div><ScoreDisplay score={this.state.score} length={arrLength}/></div>
     }
     else {
-      return <div className="checkmark" onClick={this.updateScore}>
+      let checkmark_classes = "checkmark"
+      // checkmark_classes = this.state.clicked ? checkmark_classes + " checkmark-selected" ? checkmark_classes
+      return <div className={checkmark_classes} onClick={this.updateScore}>
               <img src={checkmark} alt="check mark"/>
             </div>
     }
