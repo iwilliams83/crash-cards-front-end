@@ -19,8 +19,7 @@ class NewSubject extends Component {
   render(){
     return <div className="home-page">
             <div>
-              <h3>Thanks for stopping by! Let's make some flashcards. </h3>
-              <h4>You can reate a new deck, or view an existing deck.</h4>
+              <h3>Let's make some flashcards! </h3>
               <p>To create a new deck, type in a subject and hit 'create cards'</p>
               <form>
                 <label>
