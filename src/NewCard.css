@@ -1,0 +1,41 @@
+.new-card-page {
+  height: 325px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  color: #5a43d9;
+}
+
+.edit-inputs{
+  display: flex;
+  justify-content: space-evenly;
+  height: 100px;
+  margin-bottom: 20px;
+}
+
+.ui.input>input{
+  background: rgba(222, 216, 216, 0.47);
+  border: 2px solid #8d7af5bd;
+  color: rgba(0,0,0,.87);
+  border-radius: .28571429rem;
+  height: 4em;
+  width: 250px;
+  margin-bottom: 10px;
+}
+
+.add-save-buttons{
+  display: flex;
+  justify-content: space-evenly;
+  padding-left: 200px;
+  padding-right: 200px;
+}
+
+.add-save{
+  background-color: #5a43d9;
+  height: 30px;
+  width: 50px;
+  color: white;
+  border: solid #8d7af5;
+  border-radius: 5px;
+  width: 100px;
+}

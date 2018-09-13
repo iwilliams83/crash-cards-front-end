@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import '../cardTray.css'
-import '../App.css';
+//import '../App.css';
+//import '../NewCard.css';
+import '../custom.css';
 import { addCard, saveDeck } from '../actions/actions'
 import { connect } from 'react-redux'
 //import { Link } from 'react-router-dom'
-
+import { Input } from 'semantic-ui-react'
 
 class NewCardForm extends Component {
 
@@ -43,21 +45,24 @@ class NewCardForm extends Component {
   }
 
   render(){
-    return <div className="new-card-page">
+    return <React.Fragment>
+          <div className="form">
             <div><h4>Create a new card for your {this.props.subject} deck:</h4></div>
-            <div>
+
               <form>
+                <div className="edit-inputs">
               <label>
                 Card Front:
-                <input type="text" name="front" onChange={this.handleChange} value={this.state.front}/>
+                <Input type="text" name="front" onChange={this.handleChange} value={this.state.front}/>
               </label>
 
               <label>
                 Card Back:
-                <input type="text" name="back" onChange={this.handleChange} value={this.state.back}/>
+                <Input type="text" name="back" onChange={this.handleChange} value={this.state.back}/>
               </label>
+              </div>
             </form>
-          </div>
+
             <div className="add-save-buttons" >
               <button className="add-save" type="submit" value="Add Card" onClick={this.createCard}>
                 Add Card
@@ -66,10 +71,9 @@ class NewCardForm extends Component {
                 Save Deck
               </button>
             </div>
-
-
-
           </div>
+          <div className="footer"></div>
+        </React.Fragment>
   }
 }
 

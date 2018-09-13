@@ -7,11 +7,30 @@
   display: flex;
   justify-content: space-evenly;
   height: 100px;
+  margin-bottom: 20px;
 }
 
 .footer{
   background-color: #5cc2ba;
   height: 200px;
+}
+
+.add-save-buttons{
+  display: flex;
+  justify-content: space-evenly;
+  padding-left: 250px;
+  padding-right: 250px;
+  margin-top: 50px;
+}
+
+.add-save{
+  background-color: #5a43d9;
+  height: 30px;
+  width: 50px;
+  color: white;
+  border: solid #8d7af5;
+  border-radius: 5px;
+  width: 100px;
 }
 
 .ui.input>input{

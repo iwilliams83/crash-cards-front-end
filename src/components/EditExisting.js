@@ -47,7 +47,6 @@ class EditExisting extends Component {
             <h4>Edit Card:</h4>
             <form>
             <div className="edit-inputs">
-
                 <div >
                   <label>
                     Card Front:
