@@ -12,6 +12,11 @@ class EditExisting extends Component {
     card: {}
   }
 
+  constructor(props) {
+    super(props)
+    this.numberOfInstances = 0;
+  }
+
   componentDidMount = () => {
     this.setState({
       card: this.props.card,
